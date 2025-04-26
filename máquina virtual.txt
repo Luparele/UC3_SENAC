@@ -1,0 +1,5 @@
+python -m venv VirtualMachine (cria um ambiente virtual)
+
+VirtualMachine\Scripts\activate (ativa o ambiente virtual)
+
+deactivate (desativa o ambiente virtual)
