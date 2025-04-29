@@ -1,0 +1,10 @@
+AULA2 (28/04/2025)
+-
+
+https://mange.ifrn.edu.br/python/aprenda-com-py3/index.html
+
+https://panda.ime.usp.br/algoritmos/static/algoritmos/index.html
+
+pip install pyscript django numpy pandas
+pip freeze > requirements.txt
+pip install -r requirements.txt
