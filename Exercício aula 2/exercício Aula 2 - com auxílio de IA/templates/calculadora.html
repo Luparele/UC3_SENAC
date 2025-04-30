@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Web</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="calculadora">
+        <input type="text" id="display" value="0" disabled>
+        <div class="botoes">
+            <button onclick="limparDisplay()">C</button>
+            <button onclick="apagarUltimo()">DEL</button>
+            <button onclick="enviarOperacao('/')">/</button>
+            <button onclick="enviarOperacao('*')">*</button>
+
+            <button onclick="inserirNoDisplay('7')">7</button>
+            <button onclick="inserirNoDisplay('8')">8</button>
+            <button onclick="inserirNoDisplay('9')">9</button>
+            <button onclick="enviarOperacao('-')">-</button>
+
+            <button onclick="inserirNoDisplay('4')">4</button>
+            <button onclick="inserirNoDisplay('5')">5</button>
+            <button onclick="inserirNoDisplay('6')">6</button>
+            <button onclick="enviarOperacao('+')">+</button>
+
+            <button onclick="inserirNoDisplay('1')">1</button>
+            <button onclick="inserirNoDisplay('2')">2</button>
+            <button onclick="inserirNoDisplay('3')">3</button>
+            <button onclick="calcularResultado()">=</button>
+
+            <button onclick="inserirNoDisplay('0')" class="zero">0</button>
+            <button onclick="inserirNoDisplay('.')">.</button>
+            <button onclick="enviarOperacao('^')">^</button>
+            <button onclick="enviarFuncao('√')">√</button>
+            <button onclick="enviarFuncao('sen')">sen</button>
+            <button onclick="enviarFuncao('cos')">cos</button>
+            <button onclick="enviarFuncao('tan')">tan</button>
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+        let primeiroNumero = null;
+        let operador = null;
+
+        function inserirNoDisplay(valor) {
+            if (display.value === '0' || display.value === 'Erro' || display.value === 'Operação inválida!') {
+                display.value = valor;
+            } else {
+                display.value += valor;
+            }
+        }
+
+        function limparDisplay() {
+            display.value = '0';
+            primeiroNumero = null;
+            operador = null;
+        }
+
+        function apagarUltimo() {
+            display.value = display.value.slice(0, -1);
+            if (display.value === '') {
+                display.value = '0';
+            }
+        }
+
+        function enviarOperacao(op) {
+            primeiroNumero = display.value;
+            operador = op;
+            display.value = '0';
+        }
+
+        function enviarFuncao(funcao) {
+            fetch('/calcular', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `operacao=${funcao}&num1=${display.value}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                display.value = data.resultado || data.erro || 'Erro';
+                primeiroNumero = null;
+                operador = null;
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                display.value = 'Erro';
+            });
+        }
+
+        function calcularResultado() {
+            if (primeiroNumero === null || operador === null) return;
+            fetch('/calcular', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `operacao=${operador}&num1=${primeiroNumero}&num2=${display.value}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                display.value = data.resultado || data.erro || 'Erro';
+                primeiroNumero = null;
+                operador = null;
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                display.value = 'Erro';
+            });
+        }
+    </script>
+</body>
+</html>
