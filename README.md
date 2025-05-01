@@ -36,9 +36,7 @@ Este repositório reflete meu aprendizado pessoal durante a UC3. Não estou aber
 
 ## Autor
 
-**[Seu Nome Completo]**
-
-[![GitHub](https://img.shields.io/badge/GitHub-Profile-informational?logo=github&style=flat)](https://github.com/Luparele)
+**Eduardo Luparele**[![GitHub](https://img.shields.io/badge/GitHub-Profile-informational?logo=github&style=flat)](https://github.com/Luparele)
 
 ## Licença
 
