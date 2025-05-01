@@ -1,4 +1,4 @@
-# Repositório de Estudos - Programador Python Full Stack - Senac Rio - UC3
+# Programador Python Full Stack - Senac Rio - UC3
 
 Este repositório contém os materiais de estudo, exercícios e projetos desenvolvidos durante o módulo 3 (UC3) do curso de "Programador Python Full Stack" do Senac Rio, unidade de Nova Iguaçu.
 
