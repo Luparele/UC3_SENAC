@@ -59,42 +59,60 @@ class UsuarioRepository:
         """Retorna uma lista com todos os usuários que possuem o nome e email informados."""
         return [usuario for usuario in self.usuarios if usuario.get("nome") == nome and usuario.get("email") == email]
 
-# Exemplo de uso:
+# Exemplo de uso com os cadastros corretos:
 if __name__ == "__main__":
     repositorio = UsuarioRepository()
 
-    # Cadastrando usuários
-    repositorio.cadastrar({"nome": "Alice", "email": "alice@example.com"})
-    repositorio.cadastrar({"nome": "Bob", "email": "bob@example.com"})
-    repositorio.cadastrar({"nome": "Alice", "email": "alice.second@example.com"})
+    '''
+    Cadastrando usuários para realizar testes
+    '''
+    repositorio.cadastrar({"nome": "Eduardo", "email": "eduardo@email.com"})
+    repositorio.cadastrar({"nome": "Monique", "email": "monique@email.com"})
+    repositorio.cadastrar({"nome": "Leticia", "email": "leticia@email.com"})
 
-    # Listar todos
-    print("\n")
-    print("Todos os usuários:", repositorio.listar_todos())
-    print("\n")
-    # Buscar por email
-    usuario_bob = repositorio.buscar_por_email("bob@example.com")
-    print("Usuário com email bob@example.com:", usuario_bob)
-    print("\n")
-    # Listar por nome
-    usuarios_alice = repositorio.listar_por_nome("Alice")
-    print("Usuários com nome Alice:", usuarios_alice)
-    print("\n")
-    # Listar por email (deve retornar uma lista, mesmo que haja apenas um)
-    usuarios_com_email_alice = repositorio.listar_por_email("alice@example.com")
-    print("Usuários com email alice@example.com:", usuarios_com_email_alice)
-    print("\n")
-    # Listar por nome e email
-    usuarios_alice_second = repositorio.listar_por_nome_e_email("Alice", "alice.second@example.com")
-    print("Usuários com nome Alice e email alice.second@example.com:", usuarios_alice_second)
-    print("\n")
-    # Atualizar usuário
-    repositorio.atualizar({"nome": "Robert", "email": "bob@example.com"})
-    print("Usuários após atualizar Bob:", repositorio.listar_todos())
-    # Remover usuário
-    removido = repositorio.remover("alice@example.com")
-    print("\n")
-    print("Usuário alice@example.com removido:", removido)
-    print("\n")
-    print("Usuários restantes:", repositorio.listar_todos())
-    print("\n")
+    ''' 
+    Testando os métodos
+    '''
+
+    print("--- Teste: listar_todos() ---")
+    todos_usuarios = repositorio.listar_todos()
+    print("Todos os usuários:", todos_usuarios)
+
+    print("\n--- Teste: buscar_por_email() ---")
+    usuario_monique = repositorio.buscar_por_email("monique@email.com")
+    print("Usuário com email monique@email.com:", usuario_monique)
+    usuario_inexistente = repositorio.buscar_por_email("naoexiste@email.com")
+    print("Usuário com email naoexiste@email.com:", usuario_inexistente)
+
+    print("\n--- Teste: remover() ---")
+    removido_eduardo = repositorio.remover("eduardo@email.com")
+    print("Usuário eduardo@email.com removido:", removido_eduardo)
+    print("Usuários após remoção:", repositorio.listar_todos())
+    nao_removido = repositorio.remover("naoexiste@email.com")
+    print("Tentativa de remover não existente:", nao_removido)
+
+    print("\n--- Teste: atualizar() ---")
+    atualizado = repositorio.atualizar({"nome": "Monique Atualizada", "email": "monique@email.com"})
+    print("Atualização de monique@email.com:", atualizado)
+    usuario_monique_atualizado = repositorio.buscar_por_email("monique@email.com")
+    print("Usuário monique@email.com após atualização:", usuario_monique_atualizado)
+    nao_atualizado = repositorio.atualizar({"nome": "Teste", "email": "naoexiste@email.com"})
+    print("Tentativa de atualizar não existente:", nao_atualizado)
+
+    print("\n--- Teste: listar_por_nome() ---")
+    usuarios_eduardo = repositorio.listar_por_nome("Eduardo")
+    print("Usuários com nome Eduardo:", usuarios_eduardo)
+    usuarios_inexistente = repositorio.listar_por_nome("NomeInexistente")
+    print("Usuários com nome NomeInexistente:", usuarios_inexistente)
+
+    print("\n--- Teste: listar_por_email() ---")
+    usuarios_com_email_leticia = repositorio.listar_por_email("leticia@email.com")
+    print("Usuários com email leticia@email.com:", usuarios_com_email_leticia)
+    usuarios_com_email_inexistente = repositorio.listar_por_email("outro@email.com")
+    print("Usuários com email outro@email.com:", usuarios_com_email_inexistente)
+
+    print("\n--- Teste: listar_por_nome_e_email() ---")
+    usuario_leticia_completo = repositorio.listar_por_nome_e_email("Leticia", "leticia@email.com")
+    print("Usuários com nome Leticia e email leticia@email.com:", usuario_leticia_completo)
+    usuario_nao_encontrado = repositorio.listar_por_nome_e_email("Eduardo", "leticia@email.com")
+    print("Usuários com nome Eduardo e email leticia@email.com:", usuario_nao_encontrado)
