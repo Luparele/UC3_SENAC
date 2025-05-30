@@ -1,0 +1,46 @@
+{% extends "app_academia/base.html" %}
+{% load static %}
+
+{% block title %}Home - Academia SenacRJ{% endblock %}
+
+{% block content %}
+<div class="bg-light rounded-3 shadow-sm mb-5">
+    <div class="container-fluid px-md-5 py-5">
+        <div class="row align-items-stretch py-lg-3"> 
+            <div class="col-lg-7 col-md-12 text-center text-lg-start mb-4 mb-lg-0 d-flex flex-column">
+                <div class="flex-grow-1 d-flex flex-column justify-content-center">
+                    <h1 class="display-4 fw-bolder">Bem-vindo à Academia SenacRJ!</h1>
+                    <p class="fs-4 lead">Seu lugar para transformar corpo e mente. Oferecemos os melhores equipamentos, instrutores qualificados e um ambiente motivador para você alcançar seus objetivos.</p>
+                </div>
+                <div class="mt-4 pt-2"> 
+                    <a href="{% url 'app_academia:sobre' %}" class="btn btn-primary btn-lg px-4 me-sm-3 mb-2 mb-sm-0" type="button">Conheça Mais</a>
+                    <a href="{% url 'app_academia:cadastro_usuario' %}" class="btn btn-success btn-lg px-4" type="button">Matricule-se Já!</a>
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-12 d-flex align-items-center justify-content-center justify-content-lg-end"> 
+                <div class="home-header-image-wrapper"> 
+                    <img src="{% static 'app_academia/img/header.png' %}" alt="Academia SenacRJ - Bem-vindo" class="home-header-image-inside">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row align-items-md-stretch">
+    <div class="col-md-6 mb-4 mb-md-0">
+        <div class="h-100 p-5 text-white bg-dark rounded-3 shadow">
+            <h2>Nossos Planos</h2>
+            <p>Descubra planos flexíveis que se adaptam à sua rotina e objetivos. Qualidade e preço justo!</p>
+            <a href="{% url 'app_academia:planos' %}" class="btn btn-outline-light" type="button">Conheça Nossos Planos</a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="h-100 p-5 bg-white border rounded-3 shadow">
+            <h2>Produtos Fitness</h2>
+            <p>Confira nossa loja com suplementos, roupas e acessórios para otimizar seus treinos.</p>
+            <a href="{% url 'app_academia:produtos' %}" class="btn btn-outline-secondary" type="button">Ver Produtos</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

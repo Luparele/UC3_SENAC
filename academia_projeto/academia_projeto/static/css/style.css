@@ -1,0 +1,92 @@
+/* academia_projeto/static/css/style.css */
+.product-card-img {
+    width: 100%; /* Garante que a imagem ocupe a largura do card */
+    height: 200px; /* Altura fixa para as imagens dos produtos */
+    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer, cortando se necessário */
+}
+
+.map-responsive {
+    overflow:hidden;
+    padding-bottom:56.25%; /* Proporção 16:9 */
+    position:relative;
+    height:0;
+}
+.map-responsive iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+}
+
+.product-card-img {
+    max-height: 200px;  /* Defina aqui a altura máxima desejada para as imagens */
+    width: auto;        /* A largura se ajustará automaticamente para manter a proporção da imagem */
+    display: block;     /* Necessário para que margin: auto funcione para centralização horizontal */
+    margin-left: auto;  /* Centraliza a imagem horizontalmente dentro do card */
+    margin-right: auto; /* Centraliza a imagem horizontalmente dentro do card */
+    object-fit: contain; /* Garante que toda a imagem seja visível dentro das dimensões,
+                            mantendo a proporção e sem cortar. Se a imagem for menor
+                            que max-height, ela será exibida em seu tamanho natural (menor). */
+}
+
+.map-responsive {
+    overflow:hidden;
+    padding-bottom:56.25%; /* Proporção 16:9 */
+    position:relative;
+    height:0;
+}
+.map-responsive iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+}
+
+.social-icons a {
+    margin: 0 30px; 
+    text-decoration: none;
+    display: inline-block;
+}
+
+.home-header-image-wrapper {
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-top-left-radius: 8px;  /* Mantendo leve arredondamento nas outras bordas */
+    border-bottom-left-radius: 8px; /* Mantendo leve arredondamento nas outras bordas */
+    overflow: hidden; /* ESSENCIAL: corta a imagem para o formato do wrapper */
+    max-height: 350px; /* Altura máxima para a área da imagem */
+    line-height: 0; /* Remove qualquer espaço extra abaixo da imagem se ela se comportar como inline */
+    /* Você pode definir uma largura específica ou deixar que a coluna controle.
+       Se a coluna já tem text-center ou flex-end, o wrapper pode não precisar de width: 100%
+       Vamos dar uma largura máxima para o wrapper também. */
+    width: 100%; /* Faz o wrapper tentar ocupar a largura da coluna */
+    max-width: 450px; /* Limita a largura máxima do wrapper, ajuste conforme necessário */
+    display: block; /* Para que margin auto funcione se necessário, e para line-height:0 ter efeito */
+    margin-left: auto; /* Para centralizar em telas menores se text-center na coluna não for suficiente */
+    margin-right: auto; /* Para centralizar em telas menores */
+}
+
+.home-header-image-inside {
+    display: block; /* Remove espaço extra abaixo da imagem */
+    width: 100%;    /* Faz a imagem preencher 100% da largura do wrapper */
+    height: 100%;   /* Faz a imagem preencher 100% da altura do wrapper */
+    object-fit: cover; /* Imagem cobre a área do wrapper, pode ser cortada para manter proporção */
+                       /* Se preferir ver a imagem inteira sem cortes, use 'contain' */
+    max-height: 350px; /* Garante que a imagem não exceda a altura do wrapper */
+}
+
+@media (max-width: 991.98px) { 
+    .home-header-image-wrapper {
+        border-top-right-radius: 25px;
+        border-bottom-right-radius: 25px;
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
+        max-height: 300px; /* Altura máxima um pouco menor em telas menores */
+        /* As margens auto já devem centralizar se a coluna estiver com text-center */
+    }
+    .home-header-image-inside {
+        max-height: 300px;
+    }
+}

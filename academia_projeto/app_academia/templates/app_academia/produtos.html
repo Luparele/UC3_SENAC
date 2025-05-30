@@ -1,0 +1,45 @@
+{% extends "app_academia/base.html" %}
+
+{% block title %}Nossos Produtos - Academia Projeto{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold">Nossos Produtos</h1>
+        <p class="lead text-muted">Confira nossa seleção de produtos para potencializar seus treinos.</p>
+    </div>
+    <div class="custom-product-grid">
+        {% for produto_item in produtos %}
+        <div class="custom-product-card-wrapper d-flex align-items-stretch">
+            <div class="card h-100 shadow-sm product-card d-flex flex-column">
+                
+                <div class="product-image-container">
+                    {% if produto_item.imagem_produto %}
+                    <img src="{{ produto_item.imagem_produto.url }}" class="card-img-top product-image" alt="{{ produto_item.nome_produto }}">
+                    {% else %}
+                    <div class="product-image-placeholder d-flex align-items-center justify-content-center">
+                        <span class="text-muted small">Sem Imagem</span>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="card-body d-flex flex-column flex-grow-1"> 
+                    <h5 class="card-title product-title">{{ produto_item.nome_produto }}</h5>
+                    <p class="card-text product-price">R$ {{ produto_item.valor|stringformat:".2f" }}</p>
+                    
+                    <div class="mt-auto text-center pt-2"> 
+                        <a href="{% url 'app_academia:em_construcao' %}" class="btn btn-sm btn-outline-primary product-button">Ver Detalhes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12"> 
+            <div class="alert alert-info text-center" role="alert">
+                Nenhum produto cadastrado no momento.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
