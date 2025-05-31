@@ -1,0 +1,19 @@
+{% extends 'app_Senac/base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if page_title %}{{ page_title }}{% else %}Cadastro - Senac Cursos Online{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>{% if page_title %}{{ page_title }}{% else %}Crie sua Conta{% endif %}</h1>
+    
+    <form method="post" action="{% url 'cadastro' %}">
+        {% csrf_token %}
+        
+        {{ form.as_p }} <button type="submit" class="button-primary mt-2">Cadastrar</button>
+    </form>
+    <p class="mt-3">Já tem uma conta? <a href="{% url 'login' %}">Faça login aqui</a>.</p>
+</div>
+{% endblock %}

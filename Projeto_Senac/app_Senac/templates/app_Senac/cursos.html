@@ -1,0 +1,38 @@
+{% extends 'app_Senac/base.html' %}
+{% load static %} 
+
+{% block title %}
+    {% if page_title %}{{ page_title }}{% else %}Nossos Cursos - Senac Cursos Online{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>{% if page_title %}{{ page_title }}{% else %}Conheça Nossos Cursos{% endif %}</h1>
+
+    {% if cursos %}
+        <div class="cursos-grid">
+            {% for curso in cursos %}
+            <div class="card-curso">
+                <img src="{% if curso.imagem_curso %}{{ curso.imagem_curso.url }}{% else %}{% static 'app_Senac/img/placeholder_curso.png' %}{% endif %}" alt="Imagem do curso {{ curso.nome_curso }}">
+                
+                <h2>{{ curso.nome_curso }}</h2>
+                
+                <div class="curso-detalhes"> 
+                    <p><strong>Duração:</strong> {{ curso.duracao_meses }} {% if curso.duracao_meses == 1 %}mês{% else %}meses{% endif %}</p>
+                    <p><strong>Carga Horária:</strong> {{ curso.carga_horaria }} horas</p>
+                    <p><strong>Valor:</strong> R$ {{ curso.valor|stringformat:".2f" }}</p>
+                    </div>
+                
+                    
+                        <div class="curso-actions">
+                            <a href="{% url 'detalhe_curso' curso.id %}" class="button-link">Mais Detalhes</a> 
+                        </div>
+                    
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="mt-3">Nenhum curso disponível no momento. Volte em breve!</p>
+    {% endif %}
+</div>
+{% endblock %}

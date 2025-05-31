@@ -1,0 +1,43 @@
+{% extends 'app_Senac/base.html' %}
+{% load static %}
+
+{% block title %}{% if curso %}{{ curso.nome_curso }}{% else %}Detalhes do Curso{% endif %} - Senac Cursos Online{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% if curso %}
+        <article class="curso-detalhe-content" style="margin-top: 30px;">
+            <header class="page-header mb-4; text-align-center">
+                <h1>{{ curso.nome_curso }}</h1>
+            </header>
+
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <img src="{% if curso.imagem_curso %}{{ curso.imagem_curso.url }}{% else %}{% static 'app_Senac/img/placeholder_curso.png' %}{% endif %}" alt="Imagem do curso {{ curso.nome_curso }}" class="img-fluid" style="max-width: 200px; max-height: 200px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <div class="curso-info" style="background-color: #f8f9fa; padding: 20px; border-radius: 8px;">
+                        <h3 style="color: var(--dark-blue);">Informações do Curso:</h3>
+                        <p><strong>Duração:</strong> {{ curso.duracao_meses }} {% if curso.duracao_meses == 1 %}mês{% else %}meses{% endif %}</p>
+                        <p><strong>Carga Horária Total:</strong> {{ curso.carga_horaria }} horas</p>
+                        <p><strong>Valor:</strong> <span style="font-size: 1.4em; color: var(--dark-blue); font-weight: bold;">R$ {{ curso.valor|stringformat:".2f" }}</span></p>
+                        
+                        <h4 style="margin-top: 20px; color: var(--dark-blue);">Descrição Detalhada:</h4>
+                        <p><em>Em breve, uma descrição mais completa sobre o conteúdo programático, objetivos de aprendizado e público-alvo deste curso.</em></p>
+                    </div>
+                </div>
+            </div>
+<br>
+            <div class="mt-4 text-center">
+                <a href="{% url 'cursos' %}" class="button-link button-secondary">&larr; Voltar para Todos os Cursos</a>
+            </div>
+        </article>
+    {% else %}
+        <p class="text-center mt-5">Curso não encontrado.</p>
+        <div class="text-center mt-3">
+            <a href="{% url 'cursos' %}" class="button-link">Ver todos os cursos</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'app_Senac/base.html' %}
+{% load static %}
+
+{% block title %}Página em Construção - Senac Cursos Online{% endblock %}
+
+{% block content %}
+<div class="container text-center" style="padding-top: 50px; padding-bottom: 50px;">
+    
+    <h1 style="color: var(--dark-blue); font-size: 2.5em; margin-bottom: 20px;">Página em Construção!</h1>
+    
+    <p class="lead" style="font-size: 1.2em; color: var(--dark-text); margin-bottom: 15px;">
+        Desculpe, esta seção do nosso site ainda está sendo preparada com muito carinho para você.
+    </p>
+    <p style="font-size: 1.1em; color: var(--dark-text); margin-bottom: 30px;">
+        Estamos trabalhando para trazer novidades e o melhor conteúdo. Volte em breve para conferir!
+    </p>
+    
+    <a href="{% url 'home' %}" class="button-primary" style="padding: 12px 25px; font-size: 1.1em;">
+        Voltar à Página Inicial
+    </a>
+
+</div>
+{% endblock %}

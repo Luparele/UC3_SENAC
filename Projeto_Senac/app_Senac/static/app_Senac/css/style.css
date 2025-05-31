@@ -1,0 +1,550 @@
+/* --- :ROOT - Variáveis Globais --- */
+:root {
+    --dark-blue: #0A2463;  /* Azul Escuro Principal */
+    --yellow-accent: #FFC947; /* Amarelo para detalhes e acentos */
+    --light-text: #FFFFFF; /* Texto claro para fundos escuros */
+    --dark-text: #343a40; /* Texto escuro para fundos claros */
+    --body-bg: #F8F9FA;   /* Fundo do corpo da página (cinza claro) */
+    --container-bg: #FFFFFF; /* Fundo dos containers de conteúdo (branco) */
+    --danger-color: #dc3545; /* Cor para botões de exclusão/alerta */
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --grid-gap: 20px; /* Espaçamento entre os cards no grid de cursos */
+    --banner-height: 60px; /* Altura da faixa do topo */
+}
+
+/* --- Reset Básico & Padrões Globais --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%; 
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--body-bg);
+    color: var(--dark-text);
+    line-height: 1.6;
+    padding-top: var(--banner-height); 
+    
+    /* Configurações do Flexbox para o sticky footer */
+    display: flex;
+    flex-direction: column; 
+    min-height: 100vh; 
+}
+
+/* --- Faixa do Topo (Top Banner) --- */
+.top-banner {
+    background-color: var(--dark-blue);
+    color: var(--light-text);
+    padding: 0 15px;
+    height: var(--banner-height);
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.banner-left, .banner-right {
+    flex: 0 0 auto; 
+    min-width: 50px; 
+}
+
+.banner-center {
+    flex-grow: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+}
+
+.site-name {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--light-text);
+}
+
+.site-slogan {
+    font-size: 0.8em;
+    color: var(--yellow-accent);
+    margin-top: -2px;
+}
+
+/* --- Botão de Menu (Hambúrguer) --- */
+#menu-toggle {
+    background-color: transparent;
+    color: var(--yellow-accent);
+    border: 1px solid var(--yellow-accent);
+    font-size: 22px;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    line-height: 1; 
+}
+#menu-toggle:hover {
+    background-color: var(--yellow-accent);
+    color: var(--dark-blue);
+}
+
+/* --- NavBar Lateral --- */
+#sidebar-nav {
+    height: 100%;
+    width: 0; 
+    position: fixed;
+    z-index: 1005; 
+    top: 0;
+    left: 0; 
+    background-color: var(--dark-blue);
+    overflow-x: hidden;
+    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    padding-top: 70px; 
+    display: flex;
+    flex-direction: column;
+    box-shadow: 3px 0px 10px rgba(0,0,0,0.2);
+}
+
+#sidebar-nav.open {
+    width: 280px;
+}
+
+#close-menu-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    background: none;
+    border: none;
+    color: var(--yellow-accent);
+    cursor: pointer;
+    padding: 5px;
+}
+#close-menu-btn:hover {
+    color: var(--light-text);
+}
+
+#sidebar-nav ul {
+    list-style-type: none;
+}
+
+#sidebar-nav ul li a {
+    padding: 12px 15px 12px 25px;
+    text-decoration: none;
+    font-size: 17px;
+    color: var(--light-text);
+    display: block;
+    transition: background-color 0.2s ease, color 0.2s ease, border-left-color 0.2s ease;
+    border-left: 4px solid transparent;
+}
+
+#sidebar-nav ul li a:hover {
+    background-color: rgba(255, 201, 71, 0.1);
+    color: var(--yellow-accent);
+    border-left-color: var(--yellow-accent);
+}
+
+#sidebar-nav ul li.active a {
+    background-color: rgba(255, 201, 71, 0.15);
+    color: var(--yellow-accent);
+    border-left-color: var(--yellow-accent);
+    font-weight: 600;
+}
+
+/* --- Conteúdo Principal e Container --- */
+main {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+
+
+.container {
+    max-width: 1100px; 
+    margin: 20px auto;
+    padding: 30px;
+    background-color: var(--container-bg);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+}
+
+/* --- Títulos --- */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--dark-blue);
+    margin-top: 0;
+    margin-bottom: 18px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+h1 { font-size: 2.3em; }
+h2 { font-size: 1.9em; }
+h3 { font-size: 1.6em; }
+
+/* --- Links Gerais (fora da NavBar) --- */
+a {
+    color: var(--dark-blue);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+a:hover {
+    color: var(--yellow-accent);
+    text-decoration: underline;
+}
+
+/* --- Botões Gerais --- */
+button, input[type="submit"], .button-link {
+    background-color: var(--yellow-accent);
+    color: var(--dark-blue);
+    border: 1px solid #e6b800;
+    padding: 10px 22px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+button:hover, input[type="submit"]:hover, .button-link:hover {
+    background-color: #e6b800;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    text-decoration: none;
+}
+
+.button-secondary {
+    background-color: var(--dark-blue);
+    color: var(--light-text);
+    border-color: #071a48;
+}
+.button-secondary:hover {
+    background-color: #071a48;
+}
+
+.button-danger {
+    background-color: var(--danger-color);
+    color: var(--light-text);
+    border-color: #c82333;
+}
+.button-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-sm { 
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+/* --- Estilos para Formulários --- */
+form div { 
+    margin-bottom: 18px;
+}
+form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: var(--dark-blue);
+}
+form input[type="text"],
+form input[type="email"],
+form input[type="tel"],
+form input[type="password"],
+form input[type="number"],
+form input[type="date"],
+form textarea,
+form select,
+.form-control { 
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-control-file { 
+    padding: 8px; 
+}
+form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+form input:focus,
+form textarea:focus,
+form select:focus,
+.form-control:focus {
+    border-color: var(--yellow-accent);
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(255, 201, 71, 0.35);
+}
+
+/* --- Alertas de Mensagens Django --- */
+.alert {
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    position: relative;
+}
+.alert-success { color: #0f5132; background-color: #d1e7dd; border-color: #badbcc; }
+.alert-error { color: #842029; background-color: #f8d7da; border-color: #f5c2c7; }
+.alert-warning { color: #664d03; background-color: #fff3cd; border-color: #ffecb5; }
+.alert-info { color: #055160; background-color: #cff4fc; border-color: #b6effb; }
+
+.close-alert-btn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 20px;
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 5px;
+    line-height: 1;
+}
+
+/* --- Grid e Cards de Curso --- */
+.cursos-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--grid-gap); 
+    justify-content: center; 
+}
+
+.card-curso {
+    background-color: var(--container-bg);
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    height: 530px; 
+    flex-grow: 0; 
+    flex-shrink: 0; 
+}
+.card-curso:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+}
+
+.card-curso img {
+    width: 100%;
+    height: 250px; 
+    object-fit: contain; 
+    border-radius: 6px;
+    margin-bottom: 15px;
+    background-color: #f0f0f0;
+}
+
+.card-curso h2 {
+    font-size: 1.5em; 
+    margin-bottom: 12px;
+    color: var(--dark-blue);
+    line-height: 1.3;
+    max-height: 3.9em; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-curso p {
+    font-size: 0.95em; 
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.card-curso .curso-detalhes { 
+    flex-grow: 1; 
+    overflow-y: auto; 
+}
+
+.card-curso .curso-actions {
+    margin-top: auto; 
+}
+.card-curso .curso-actions a.button-link { 
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* --- Estilos para Tabelas (Páginas Admin do Site) --- */
+.admin-table-responsive {
+    overflow-x: auto; 
+}
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    font-size: 0.95em;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    min-width: 600px; 
+}
+.admin-table th,
+.admin-table td {
+    border: 1px solid #dee2e6;
+    padding: 12px 15px;
+    text-align: left;
+    vertical-align: middle;
+}
+.admin-table thead th {
+    background-color: var(--dark-blue);
+    color: var(--light-text);
+    font-weight: 600;
+    border-color: var(--dark-blue);
+}
+.admin-table tbody tr:nth-of-type(even) {
+    background-color: #f8f9fa;
+}
+.admin-table tbody tr:hover {
+    background-color: #e9ecef;
+}
+.admin-table .actions a, 
+.admin-table .actions button { 
+    margin-right: 8px;
+}
+.admin-table .actions a:last-child,
+.admin-table .actions button:last-child {
+    margin-right: 0;
+}
+.badge {
+    display: inline-block;
+    padding: .35em .65em;
+    font-size: .75em;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
+}
+.bg-success { background-color: #198754 !important; } 
+.bg-warning { background-color: #ffc107 !important; } 
+.bg-info { background-color: #0dcaf0 !important; } 
+.bg-secondary { background-color: #6c757d !important; } 
+.text-dark { color: #212529 !important; }
+
+
+/* --- Rodapé --- */
+footer {
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 40px; 
+    background-color: var(--dark-blue);
+    color: var(--light-text);
+}
+footer p {
+    margin-bottom: 10px;
+    font-size: 0.95em;
+}
+footer a {
+    color: var(--yellow-accent);
+    text-decoration: none;
+}
+footer a:hover {
+    color: var(--light-text);
+    text-decoration: underline;
+}
+
+/* --- Classes Utilitárias --- */
+.text-center { text-align: center !important; }
+.mt-1 { margin-top: 0.5rem !important; }
+.mt-2 { margin-top: 1rem !important; }
+.mt-3 { margin-top: 1.5rem !important; }
+.mb-1 { margin-bottom: 0.5rem !important; }
+.mb-2 { margin-bottom: 1rem !important; }
+.mb-3 { margin-bottom: 1.5rem !important; }
+.my-4 { margin-top: 2rem !important; margin-bottom: 2rem !important; }
+.fw-bold { font-weight: bold !important; } 
+
+
+/* --- Layout Responsivo dos Cards --- */
+/* Telas Pequenas (ex: smartphones, < 600px) */
+.card-curso {
+    flex-basis: 90%; 
+}
+
+/* Telas Médias - Tipo 2 (ex: tablets em modo retrato, 600px - 899px) */
+@media (min-width: 600px) {
+    .card-curso {
+        flex-basis: calc((100% - 1 * var(--grid-gap)) / 2);
+    }
+}
+
+/* Telas Médias - Tipo 1 (ex: tablets em modo paisagem, desktops pequenos, 900px - 1199px) */
+@media (min-width: 900px) {
+    .card-curso {
+        flex-basis: calc((100% - 2 * var(--grid-gap)) / 3);
+    }
+}
+
+/* Telas Grandes (ex: desktops, >= 1200px) */
+@media (min-width: 1200px) {
+    .card-curso {
+        flex-basis: calc((100% - 3 * var(--grid-gap)) / 4);
+    }
+}
+
+/* --- Ajustes Responsivos Gerais --- */
+@media (max-width: 768px) {
+    #sidebar-nav.open {
+        width: 250px; 
+    }
+    .container {
+        padding: 20px;
+    }
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.7em; }
+
+    .site-name { font-size: 1em; }
+    .site-slogan { font-size: 0.7em; }
+    .top-banner { padding: 0 10px; height: 50px; } 
+    body { padding-top: 50px; } 
+    #menu-toggle { font-size: 20px; padding: 5px 10px; }
+
+}
+
+@media (max-width: 480px) {
+    main {
+        padding: 15px;
+    }
+    .container {
+        padding: 15px;
+        margin: 10px auto;
+    }
+    button, input[type="submit"], .button-link {
+        padding: 10px 15px;
+        font-size: 15px;
+    }
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="tel"],
+    form input[type="password"],
+    form input[type="number"],
+    form textarea,
+    form select,
+    .form-control {
+        padding: 10px;
+    }
+    .top-banner { height: 45px; } 
+    body { padding-top: 45px; } 
+    .site-name { font-size: 0.9em; }
+    .site-slogan { display: none; } 
+    #menu-toggle { font-size: 18px; padding: 4px 8px; }
+}
+
+.message-container {
+    width: 55%; 
+    margin-left: auto;  
+    margin-right: auto; 
+}

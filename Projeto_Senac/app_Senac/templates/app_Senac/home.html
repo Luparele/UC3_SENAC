@@ -1,0 +1,63 @@
+{% extends 'app_Senac/base.html' %}
+{% load static %}
+
+{% block title %}Bem-vindo ao Senac Cursos Online - Transforme seu Futuro!{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <section class="hero-section text-center" style="padding: 40px 20px 50px 20px; margin-top: 20px; background-color: var(--container-bg); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+        <img src="{% static 'app_Senac/img/logo.png' %}" alt="Logo Senac Cursos Online" style="max-width: 200px; margin-bottom: 25px;">
+        <h1 style="color: var(--dark-blue); font-size: 2.8em; margin-bottom: 15px;">Desenvolva seu Potencial Conosco!</h1>
+        <p class="lead" style="font-size: 1.2em; color: var(--dark-text); max-width: 700px; margin: 0 auto 30px auto;">
+            No Senac Cursos Online, você encontra a flexibilidade e a qualidade que precisa para alcançar novos patamares em sua carreira. Explore nossos cursos e comece a aprender hoje mesmo!
+        </p>
+        <div class="cta-buttons">
+            {% if not user.is_authenticated %}
+                <a href="{% url 'cadastro' %}" class="button-primary" style="margin-right: 15px; padding: 12px 25px; font-size: 1.1em;">Quero me Cadastrar</a>
+                <a href="{% url 'login' %}" class="button-secondary" style="padding: 12px 25px; font-size: 1.1em;">Já Tenho Conta (Login)</a>
+            {% else %}
+                <a href="{% url 'cursos' %}" class="button-primary" style="padding: 12px 25px; font-size: 1.1em;">Explorar Cursos</a>
+            {% endif %}
+        </div>
+    </section>
+<br>
+    <section class="features-section mt-5 mb-5">
+        <h2 class="text-center mb-4" style="font-size: 2.2em;">Por que Estudar no Senac Cursos Online?</h2>
+        <div class="row text-center">
+            <hr class="my-5">
+            <div class="col-md-4 mb-4">
+                <div class="feature-item" style="padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); min-height: 220px;">
+                    {# Adicione um ícone aqui se desejar - ex: usando FontAwesome ou SVG #}
+                    <h3 style="color: var(--dark-blue); margin-top:15px;">Cursos de Alta Qualidade</h3>
+                    <p>Conteúdo atualizado, desenvolvido por especialistas e focado nas demandas do mercado de trabalho.</p>
+                </div>
+            </div>
+            <hr class="my-5">
+            <div class="col-md-4 mb-4">
+                <div class="feature-item" style="padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); min-height: 220px;">
+                    <h3 style="color: var(--dark-blue); margin-top:15px;">Flexibilidade para Aprender</h3>
+                    <p>Estude no seu ritmo, de onde estiver e quando quiser. Nossa plataforma está disponível 24/7 em qualquer dispositivo.</p>
+                </div>
+            </div>
+            <hr class="my-5">
+            <div class="col-md-4 mb-4">
+                <div class="feature-item" style="padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); min-height: 220px;">
+                    <h3 style="color: var(--dark-blue); margin-top:15px;">Certificados com Reconhecimento</h3>
+                    <p>Impulsione sua carreira com certificados que comprovam suas novas habilidades e conhecimentos.</p>
+                </div>
+            </div>
+            <hr class="my-5">
+        </div>
+    </section>
+<br>
+    <section class="cta-cursos-section text-center" style="background-color: var(--dark-blue); color: var(--light-text); padding: 40px 20px; border-radius: 8px;">
+        <h2 style="font-size: 2em; margin-bottom: 15px; color: var(--light-text);">Pronto para Começar?</h2>
+        <p class="lead" style="margin-bottom: 30px; color: var(--light-text); opacity:0.9;">
+            Navegue pelo nosso catálogo completo e encontre o curso perfeito para você.
+        </p>
+        <a href="{% url 'cursos' %}" class="button-primary" style="background-color: var(--yellow-accent); color: var(--dark-blue); padding: 12px 30px; font-size: 1.1em;">Ver Todos os Cursos</a>
+    </section>
+
+</div>
+{% endblock %}

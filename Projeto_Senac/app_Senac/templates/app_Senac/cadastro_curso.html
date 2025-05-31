@@ -1,0 +1,66 @@
+{% extends 'app_Senac/base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if page_title %}{{ page_title }}{% else %}Cadastrar Curso - Admin Senac{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>{% if page_title %}{{ page_title }}{% else %}Cadastro e Gerenciamento de Cursos (Admin){% endif %}</h1>
+
+    <section id="formulario-cadastro-curso">
+        <form method="post" action="{% url 'cadastro_curso' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="button-primary mt-2">Salvar Curso</button>
+        </form>
+    </section>
+
+    <hr class="my-4">
+
+    <section id="lista-cursos-cadastrados">
+        <h2>Cursos Cadastrados ({{ cursos.count }})</h2>
+        {% if cursos %}
+            <div class="admin-table-responsive">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Nome do Curso</th>
+                            <th>Duração (Meses)</th>
+                            <th>Carga Horária (Horas)</th>
+                            <th>Valor (R$)</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for curso_item in cursos %}
+                        <tr>
+                            <td>{{ curso_item.nome_curso }}</td>
+                            <td>{{ curso_item.duracao_meses }}</td>
+                            <td>{{ curso_item.carga_horaria }}</td>
+                            <td>R$ {{ curso_item.valor|stringformat:".2f" }}</td>
+                            <td class="actions">
+                                <a href="{% url 'admin:app_Senac_curso_change' curso_item.id %}" 
+                                   class="button-link button-secondary btn-sm" 
+                                   target="_blank" 
+                                   title="Editar este curso no painel Admin do Django">
+                                   Editar (Admin)
+                                </a>
+                                
+                                <form method="post" action="{% url 'excluir_curso' curso_item.id %}" style="display: inline;" onsubmit="return confirm('Tem certeza que deseja excluir o curso \'{{ curso_item.nome_curso|escapejs }}\'? Esta ação não pode ser desfeita.');">
+                                    {% csrf_token %}
+                                    <button type="submit" class="button-link button-danger btn-sm">Excluir</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p>Nenhum curso cadastrado ainda.</p>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}
